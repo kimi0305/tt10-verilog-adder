@@ -37,8 +37,8 @@ async def test_project(dut):
     assert dut.uo_out.value == 255
 
     # Set the input values you want to test
-    dut.ui_in.value = 1
-    dut.uio_in.value = 1
+    dut.ui_in.value = 255
+    dut.uio_in.value = 255
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
