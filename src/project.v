@@ -5,7 +5,7 @@
 
 `default_nettype none
 
-module priority_encoder (
+module matching_inverter (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output reg [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -16,28 +16,15 @@ module priority_encoder (
     input  wire       rst_n     // reset_n - low to reset
 );
  
-    always @(*) begin
-        if (ui_in == 8'b0 && uio_in == 8'b0) begin 
-            uo_out = 8'b11110000;
-        end 
-        else begin 
-            if (ui_in[7]) uo_out = 8'd15;
-            else if (ui_in[6]) uo_out = 8'd14;
-            else if (ui_in[5]) uo_out = 8'd13;
-            else if (ui_in[4]) uo_out = 8'd12;
-            else if (ui_in[3]) uo_out = 8'd11;
-            else if (ui_in[2]) uo_out = 8'd10;
-            else if (ui_in[1]) uo_out = 8'd9;
-            else if (ui_in[0]) uo_out = 8'd8;
-            else if (uio_in[7]) uo_out = 8'd7;
-            else if (uio_in[6]) uo_out = 8'd6;
-            else if (uio_in[5]) uo_out = 8'd5;
-            else if (uio_in[4]) uo_out = 8'd4;
-            else if (uio_in[3]) uo_out = 8'd3;
-            else if (uio_in[2]) uo_out = 8'd2;
-            else if (uio_in[1]) uo_out = 8'd1;
-            else if (uio_in[0]) uo_out = 8'd0;
-        end
+    always @(*) begin 
+        uo_out[7] = (ui_in[7] == uio_in[7]) ? ~ui_in[7] : ui_in[7];
+        uo_out[6] = (ui_in[6] == uio_in[6]) ? ~ui_in[6] : ui_in[6];
+        uo_out[5] = (ui_in[5] == uio_in[5]) ? ~ui_in[5] : ui_in[5];
+        uo_out[4] = (ui_in[4] == uio_in[4]) ? ~ui_in[4] : ui_in[4];
+        uo_out[3] = (ui_in[3] == uio_in[3]) ? ~ui_in[3] : ui_in[3];
+        uo_out[2] = (ui_in[2] == uio_in[2]) ? ~ui_in[2] : ui_in[2];
+        uo_out[1] = (ui_in[1] == uio_in[1]) ? ~ui_in[1] : ui_in[1];
+        uo_out[0] = (ui_in[0] == uio_in[0]) ? ~ui_in[0] : ui_in[0];
     end 
     
   // All output pins must be assigned. If not used, assign to 0.
