@@ -40,9 +40,5 @@ TOPLEVEL = tb
 # MODULE is the basename of the Python test file
 MODULE = test
 
-# Ensure the simulation build directory exists
-$(SIM_BUILD):
-	mkdir -p $(SIM_BUILD)
-
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim
